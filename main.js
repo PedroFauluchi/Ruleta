@@ -1,43 +1,28 @@
-let i=0;
-let billetera = +100000;
 let h1 = document.querySelector('h1');
-h1.textContent = `$${billetera}`;
-let apuesta = 0;
-let monto = 0;
-let num = parseInt(Number);
+let h2 = document.querySelector('h2');
+let h3 = document.querySelector('h3');
+let billetera = +10000;
+let num = 0;
+h1.textContent = `Su balance es de $${billetera}`;
+
 function handleSubmit(event){
     event.preventDefault();
-    apuesta = parseInt(event.target.apuesta.value);
-    monto = parseInt(event.target.monto.value);
-    id = setInterval(random, 100);
+    let monto = +event.target.monto.value;
+    let apuesta = +event.target.apuesta.value;
+    if(monto<=billetera && monto>0){
+    h3.textContent = '';
+    let intervalo = setInterval(random, 100);
+    setTimeout(() => {
+        clearInterval(intervalo);
+        billetera += (apuesta == num) ? monto * 35 : -monto;
+        h3.textContent = (apuesta == num) ? `Usted ganó $${monto*35}`:`Usted perdió $${monto}`
+        h1.textContent = `Su balance es de $${billetera}`;
+    }, 2000);
+}
+else h3.textContent = 'Monto Inválido';
 }
 
 function random(){
-    if(billetera>=monto){
-    i++;
-    if(i<20){
-    num = parseInt(Math.floor(Math.random()*36));
-    let h2 = document.querySelector('h2');
-    h2.textContent = num;
-    }
-    else{
-        clearInterval(id);
-        i=0;
-        if (apuesta==num){
-        billetera=billetera+monto*35;
-        h1.textContent = `$${billetera}`;
-        alert('¡Ganaste!');
-    }
-        else{
-        billetera=billetera-monto;
-        h1.textContent = `$${billetera}`;
-    }
-    }
-    console.log(num);
-    console.log(apuesta);
-    console.log(monto);
-}
-else{
-    clearInterval(id);
-}
+    num = Math.floor(Math.random()*10);
+    h2.textContent = `${num}`;
 }
