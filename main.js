@@ -23,6 +23,6 @@ else h3.textContent = 'Monto Inválido';
 }
 
 function random(){
-    num = Math.floor(Math.random()*10);
+    num = Math.floor(Math.random()*36);
     h2.textContent = `${num}`;
 }
